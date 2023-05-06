@@ -1,38 +1,34 @@
 //initialising whatsapp and qrcode
 
-let response = 'Hello'
+// let response = 'Hello'
 
-const qrcode = require('qrcode-terminal');
+// const qrcode = require('qrcode-terminal');
 
-const { Client } = require('whatsapp-web.js');
-const client = new Client();
+// const { Client } = require('whatsapp-web.js');
+// const client = new Client();
 
-client.on('qr', qr => {
-    qrcode.generate(qr, { small: true });
-});
+// client.on('qr', qr => {
+//     qrcode.generate(qr, { small: true });
+// });
 
-client.on('ready', () => {
-    console.log('Client is ready!');
-});
+// client.on('ready', () => {
+//     console.log('Client is ready!');
+// });
 
-client.initialize();
+// client.initialize();
 
 
 
 // fetching texts testing
 
+
 // client.on('message', message => {
 //     console.log(message.body);
+
+//     if (message.body === '!ping') {
+//         message.reply('pong');
+//     }
 // });
-
-
-client.on('message', message => {
-    console.log(message.body);
-
-    if (message.body === '!ping') {
-        message.reply('pong');
-    }
-});
 
 
 //
@@ -41,17 +37,44 @@ client.on('message', message => {
 
 
 // openai testing for chatbot
-// const { Configuration, OpenAIApi } = require("openai");
-// const configuration = new Configuration({
-//     apiKey: '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',
-// });
-// const openai = new OpenAIApi(configuration);
-// const openai_response = openai.createCompletion({
-//     model: "text-davinci-003",
-//     prompt: "Say this is a test",
-//     temperature: 0,
-//     max_tokens: 7,
-// });
+
+let userInput = 'I think i have sore throat';
+
+const { Configuration, OpenAIApi } = require("openai");
+const basePromptPrefix = "Assume that you are a friendly healthcare bot called 'Health Genie', greet the user with a cordial greeting (DO NOT ANSWER ANY QUESTION RELATED TO SOMETHING OTHER THAN HEALTHCARE, JUST SAY THAT YOU ARE NOT ALLOWED TO ANSWER IF THIS HAPPENS), now suggest me tips and remedies for the following (AlSO, END THE RESPONSE WITH A CORDIAL OPEN ENDED GOODBYE)- ";
+
+const configuration = new Configuration({
+    apiKey: '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',
+});
+
+
+const openai = new OpenAIApi(configuration);
+
+const generateResponse = async () => {
+
+    console.log(`API: ${basePromptPrefix}${userInput}`)
+
+
+    const openai_response = await openai.createCompletion({
+        model: "text-davinci-003",
+        prompt: `${basePromptPrefix}${userInput}`,
+        temperature: 0,
+        max_tokens: 250,
+    });
+
+    const basePromptOutput = openai_response.data.choices.pop();
+    // console.log(basePromptOutput);
+    console.log(basePromptOutput.text);
+
+
+
+}
+
+
+generateResponse();
+
+// openai_response();
+// console.log(basePromptOutput);
 
 
 // import { Configuration, OpenAIApi } from 'openai';
