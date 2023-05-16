@@ -19,7 +19,7 @@ client.on('ready', () => {
 
 client.initialize();
 
-// initialising openai stuff
+// initialising openai chatgpt 
 
 // basic configuration
 const { Configuration, OpenAIApi } = require("openai");
@@ -29,7 +29,7 @@ const basePromptPrefix = "Assume that you are a friendly healthcare bot called '
 
 // open ai api key config
 const configuration = new Configuration({
-    apiKey: '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',
+    apiKey: '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',
 });
 
 // initialising the openai object
