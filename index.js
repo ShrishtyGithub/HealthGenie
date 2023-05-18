@@ -29,7 +29,7 @@ const basePromptPrefix = "Assume that you are a friendly healthcare bot called '
 
 // open ai api key config
 const configuration = new Configuration({
-    apiKey: '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',
+    apiKey: '',
 });
 
 // initialising the openai object
